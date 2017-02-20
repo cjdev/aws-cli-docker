@@ -30,6 +30,24 @@ An automated build of this image is on Docker Hub: https://hub.docker.com/r/cjen
 
 ## Example Usage:
 
+### Run the kick-ecs-service:
+The following error occurs when you attempt to UPDATE your stack with an image that contains code changes that AWS cannot
+detect:
+```An error occurred (ValidationError) when calling the UpdateStack operation: No updates are to be performed.```
+
+AWS does not have a good way of detecting changes to images, as a way around this limitation,
+you will need to change the version of the taskDefinition each you want to deploy an image with changes
+so that we can update the stack successfully. The following accomplishes bumping the taskDefinition version:
+
+    docker container run \
+    --env AWS_ACCESS_KEY_ID=<<YOUR_ACCESS_KEY_ID>> \
+    --env AWS_SECRET_ACCESS_KEY=<<YOUR_SECRET_ACCESS_KEY>> \
+    --env AWS_DEFAULT_REGION=us-east-1 \
+    --env CLUSTER_NAME=<<YOUR_CLUSTER_NAME>> \
+    --env SERVICE_NAME= <<YOUR_SERVICE_NAME>> \
+    --env TASK_DEFINITION_NAME= <<YOUR_TASK_DEFINITION_NAME>> \
+    aws-cli-docker kick-ecs-service.sh
+
 ### Describe an instance:
 
     docker run \

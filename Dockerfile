@@ -6,4 +6,6 @@ RUN apk --no-cache update && \
     pip --no-cache-dir install awscli && \
     rm -rf /var/cache/apk/*
 
+COPY kick-ecs-service.sh /usr/local/bin/kick-ecs-service.sh
+
 WORKDIR /data
