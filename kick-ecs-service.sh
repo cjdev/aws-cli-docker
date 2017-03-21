@@ -22,4 +22,5 @@ REVISION=$( \
 aws ecs update-service \
   --cluster "$CLUSTER_NAME" \
   --service "$SERVICE_NAME" \
-  --task-definition "$TASK_DEFINITION_NAME:$REVISION"
+  --task-definition "$TASK_DEFINITION_NAME:$REVISION" \
+  --query 'service.deployments'
